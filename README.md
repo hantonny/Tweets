@@ -1,0 +1,1 @@
+# 💻 Buscar tweets específicos no X (anteriormente conhecido como Twitter) utilizando a linguagem de programação Python.
