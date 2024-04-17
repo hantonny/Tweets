@@ -10,7 +10,7 @@ def salvar_tweets():
 
     payload = {
         'api_key': '67fbab56fad83e9eb05574e9e141618d',
-        'query': 'bolsonaro',
+        'query': 'rose modesto',
         'num': '100',
         'country': 'br',
     }

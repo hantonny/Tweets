@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salvamento de Tweets</title>
+</head>
+
+<body>
+  <button onclick="salvarTweets()">Buscar</button>
+  <script>
+    // Palavras a serem verificadas
+    const palavrasPositivas = ['Honesto', 'Integro', 'Competente', 'Trabalhar', 'Cria', 'Lança', 'Redução'];
+    const palavrasNegativas = ['Corrupto', 'Ladrão', 'Corrupção', 'Ruim', 'Morte', 'Aumento', 'Denúncia', 'IMPOSTO'];
+
+    async function salvarTweets() {
+      const payload = {
+        api_key: '67fbab56fad83e9eb05574e9e141618d',
+        query: 'rose modesto',
+        num: '100',
+        country: 'br',
+      };
+
+      const queryString = new URLSearchParams(payload).toString();
+      const response = await fetch(`https://api.scraperapi.com/structured/twitter/search?${queryString}`);
+      const data = await response.json();
+      const allTweets = data.organic_results;
+      const twitterData = allTweets.filter(tweet => tweet.snippet);
+      const newNegativeTweets = twitterData.filter(tweet => palavrasNegativas.some(palavra => tweet.snippet.toLowerCase().includes(palavra.toLowerCase())));
+      const newPositiveTweets = twitterData.filter(tweet => palavrasPositivas.some(palavra => tweet.snippet.toLowerCase().includes(palavra.toLowerCase())));
+
+      console.log(`${newPositiveTweets.length} tweets contendo palavras positivas foram encontrados.`);
+      console.log(`${newNegativeTweets.length} tweets contendo palavras negativas foram encontrados.`);
+    }
+
+    // Iniciar o salvamento dos tweets
+
+  </script>
+</body>
+
+</html>
